@@ -13,9 +13,21 @@ public class InterfaceClient {
 				if (y == 1) {
 					System.out.print("|");					
 				}
-				System.out.print(table[x][y]);
+				if (table[x][y] == 0) {
+					System.out.print(" ");
+				}			
+				else if (table[x][y] == 1 && x>=1 && y>=1) {
+					System.out.print("*");
+				}	
+				else if (table[x][y] == 2 && x>=1 && y>=1) {
+					System.out.print("o");
+				}	
+				else {
+					System.out.print(table[x][y]);
+				}
 			}
 			System.out.println("");
 		}
 	}
 }
+

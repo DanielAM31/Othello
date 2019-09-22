@@ -8,5 +8,6 @@ public class Tablero {
 			table[0][i] = i;
 			table[i][0] = i;
 		}
+		table[4][5] = 2;
 	}
 }
