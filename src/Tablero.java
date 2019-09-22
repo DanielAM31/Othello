@@ -42,4 +42,9 @@ public class Tablero {
 			return true;
 		}
 	}
+	
+	public boolean anypiece(int x, int y) {
+		return this.table[x][y] > 0;
+	}
+	
 }

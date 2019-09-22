@@ -1,7 +1,8 @@
+import javax.swing.JOptionPane;
 
 public class InterfaceClient {
 	
-	public void show(int[][] table) {
+	public void showtable(int[][] table) {
 		for(int x=0; x<table.length; x++) {
 			if (x == 1) {
 				for (int i = 0; i <= table.length; i++) {
@@ -30,6 +31,12 @@ public class InterfaceClient {
 			System.out.println("");
 		}
 	}
-	
+
+	public int[] entercoordines(String textplayer){
+		int[] coord = {0, 0};
+		coord[0] = Integer.parseInt(JOptionPane.showInputDialog(textplayer + ":\nIngresa x"));
+		coord[1] = Integer.parseInt(JOptionPane.showInputDialog(textplayer + ":\nIngresa y"));
+		return coord;
+	}
 }
 
