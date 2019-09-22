@@ -1,5 +1,6 @@
 
 public class InterfaceClient {
+	
 	public void show(int[][] table) {
 		for(int x=0; x<table.length; x++) {
 			if (x == 1) {
@@ -29,5 +30,6 @@ public class InterfaceClient {
 			System.out.println("");
 		}
 	}
+	
 }
 
