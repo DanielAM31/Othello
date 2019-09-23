@@ -1,16 +1,16 @@
 
 public class Player {
 	
-	private int typepiece;
+	private Piece piece;
 	private int countpieces;
 	private boolean token;
 	
-	public Player(int piece) {
-		this.typepiece = piece;
+	public Player(Piece piece) {
+		this.piece = piece;
 	}
 	
 	public int gettypepiece() {
-		return this.typepiece;
+		return this.piece.gettypepiece();
 	}
 	
 	public int getcountpieces() {
