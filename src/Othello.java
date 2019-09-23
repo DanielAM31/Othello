@@ -39,7 +39,7 @@ public class Othello {
 				coords = objInterfaceClient.entercoordines("Player 2", table_length);
 				coordNoValid = objTablero.doMove(coords[0], coords[1], piece2);
 				objInterfaceClient.showtable(objTablero, piece0, piece1, piece2);
-			} while(coordNoValid == 0);	
+			} while(coordNoValid == 0);
 			
 		} while(objTablero.getcountpiece(piece0) > 0);
 		
