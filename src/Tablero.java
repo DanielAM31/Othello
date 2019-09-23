@@ -86,9 +86,21 @@ public class Tablero {
 		int[] dataRule = this.ruleDir0(x, y);
 		options[0] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
 				
+		dataRule = this.ruleDir1(y);
+		options[1] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		
+		dataRule = this.ruleDir3(x, maxlength);
+		options[3] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
 		
 		dataRule = this.ruleDir4(x, y, maxlength);
 		options[4] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		
+		dataRule = this.ruleDir5(y, maxlength);
+		options[5] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		
+		dataRule = this.ruleDir7(x);
+		options[7] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		
 	}
 	
 	private int[] ruleDir0(int x, int y) {
@@ -101,6 +113,26 @@ public class Tablero {
 		return array;
 	}
 	
+	private int[] ruleDir1(int y) {
+		int[] array = {0,-1, y - 1};
+		return array;
+	}
+	
+//	private int[] ruleDir2(int x, int y, int maxlength) {
+//		int[] array = {+1,-1, 0};
+//		int maxDiag = maxlength - x;
+//		int ruleChange = x - y;
+//		int maxIterations = maxDiag;
+//		if (ruleChange < 0) {maxIterations = maxDiag + ruleChange;}
+//		array[2] = maxIterations;
+//		return array;
+//	}
+	
+	private int[] ruleDir3(int x, int maxlength) {
+		int[] array = {+1,0, maxlength - x};
+		return array;
+	}
+	
 	private int[] ruleDir4(int x, int y, int maxlength) {
 		int[] array = {+1,+1, 0};
 		int maxDiag = maxlength - x;
@@ -108,6 +140,28 @@ public class Tablero {
 		int maxIterations = maxDiag;
 		if (ruleChange < 0) {maxIterations = maxDiag + ruleChange;}
 		array[2] = maxIterations;
+		return array;
+	}
+	
+	private int[] ruleDir5(int y, int maxlength) {
+		int[] array = {0,+1, maxlength - y};
+		return array;
+	}
+	
+//	private int[] ruleDir6(int x, int y, int maxlength) {
+//		int[] array = { -1, +1, 0 };
+//		int maxDiag = maxlength - x;
+//		int ruleChange = x - y;
+//		int maxIterations = maxDiag;
+//		if (ruleChange < 0) {
+//			maxIterations = maxDiag + ruleChange;
+//		}
+//		array[2] = maxIterations;
+//		return array;
+//	}
+	
+	private int[] ruleDir7(int x) {
+		int[] array = {-1,0, x - 1};
 		return array;
 	}
 	
