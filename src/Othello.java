@@ -26,11 +26,13 @@ public class Othello {
 			player2.settoken(false);
 			
 			int[] coords = new int [2];
+			int coordNoValid = 0;
 			do {
-				coords = objInterfaceClient.entercoordines("Player 1", table_length - 1);	
-			} while(objTablero.anypiece(coords[0],coords[1]));
+				coords = objInterfaceClient.entercoordines("Player 1", table_length - 1);
+				coordNoValid = objTablero.doMove(coords[0], coords[1], piece1);
+			} while(coordNoValid == 0);
 			
-			objTablero.prueba(coords[0], coords[1], piece1);
+			
 			
 		} while(objTablero.getcountpiece(piece1) < 1); // cambiar a piecezero
 

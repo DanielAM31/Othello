@@ -74,7 +74,11 @@ public class Tablero {
 		return this.table[x][y] != piece0.gettypepiece();
 	}
 	
-	public void prueba(int x, int y, Piece myPiece) {
+	public int doMove(int x, int y, Piece myPiece) {
+		if(this.anypiece(x, y)) {
+			return 0;
+		}
+		
 		int maxlength = this.table.length - 1;
 		int[] options = new int[8];;
 		
@@ -106,6 +110,14 @@ public class Tablero {
 		
 		dataRule = this.ruleDir7(x);
 		options[7] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		
+		int posible = 0;
+		for (int i = 0; i < options.length; i++) {
+			if (options[i] > 0) {
+				posible++;
+			}
+		}
+		return posible;
 	}
 	
 	private int[] ruleDir0(int x, int y) {
