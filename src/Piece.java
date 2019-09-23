@@ -1,13 +1,12 @@
-
 public class Piece {
 	
 	private int typepiece;
 	
-	public Piece(int typepiece) {
+	public Piece (int typepiece) {
 		this.typepiece = typepiece;
 	}
 	
-	public int gettypepiece() {
+	public int gettypepiece () {
 		return this.typepiece;
 	}
 }

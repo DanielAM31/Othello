@@ -1,7 +1,6 @@
-
 public class Othello {
 	
-	public static void main(String[] args) {
+	public static void main (String[] args) {
 		
 		int table_length = 8;
 		
@@ -18,34 +17,54 @@ public class Othello {
 		Player player1 = new Player(piece1);
 		Player player2 = new Player(piece2);
 		
-		do {
-			player1.setcountpieces(objTablero.getcountpiece(piece1));
-			player2.setcountpieces(objTablero.getcountpiece(piece2));
-					
-			int[] coords = new int [2];
-			int coordNoValid = 0;
-			
-			do {
-				player1.settoken(true);
-				player2.settoken(false);
-				coords = objInterfaceClient.entercoordines("Player 1", table_length);
-				coordNoValid = objTablero.doMove(coords[0], coords[1], piece1);
-				objInterfaceClient.showtable(objTablero, piece0, piece1, piece2);
-			} while(coordNoValid == 0);
-			
-			do {
-				player1.settoken(false);
-				player2.settoken(true);
-				coords = objInterfaceClient.entercoordines("Player 2", table_length);
-				coordNoValid = objTablero.doMove(coords[0], coords[1], piece2);
-				objInterfaceClient.showtable(objTablero, piece0, piece1, piece2);
-			} while(coordNoValid == 0);
-			
-		} while(objTablero.getcountpiece(piece0) > 0);
+		player1.setcountpieces(objTablero.getcountpiece(piece1));
+		player2.setcountpieces(objTablero.getcountpiece(piece2));
 		
-
+		Test objTest = new Test();
+		boolean testRun = objInterfaceClient.iwantruntest();
+		
+		int[] coords = new int [2];
+		int coordsNoValid = 0;
+		int possiblePlay = 0;
+		String[] textPlayer = {"Jugador 1", "Jugador 2"};
+		Piece[] pieceToMove = {piece1, piece2};
+		int play = 0; // 0 es textPlayer y pieceToMove [0]. Mientras que 1 es textPlayer y pieceToMove [1]
+		int allPieces0 = (table_length * table_length) - 4;
+		
+		// Run game and start move Player 1
+		while (allPieces0 > 0) {
+			for (int i = 1; i < table_length + 1; i++) {
+				for (int j = 1; j < table_length + 1; j++) {
+					possiblePlay += objTablero.doMove(i, j, pieceToMove[play], true);
+				}
+				if (possiblePlay > 0) {
+					break;
+				}
+			}
+			
+			if (possiblePlay > 0)  {
+				possiblePlay = 0;
+				while (coordsNoValid == 0) {
+					if (testRun == false) {
+						coords = objInterfaceClient.entercoordines(textPlayer[play], table_length);										
+					}
+					else {
+						coords = objTest.getonecoords();
+						testRun = objTest.stilltest();
+					}
+					coordsNoValid = objTablero.doMove(coords[0], coords[1], pieceToMove[play], false);					
+				}
+				coordsNoValid = 0;
+			}
+			
+			if (play == 0) {play = 1;}
+			else {play = 0;}
+			
+			objInterfaceClient.showtable(objTablero, piece0, piece1, piece2);
+			allPieces0 = objTablero.getcountpiece(piece0);
+		}
+		
+		objInterfaceClient.showwin(textPlayer, pieceToMove, objTablero);
 	}
+	
 }
-
-
-
