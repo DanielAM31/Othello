@@ -7,20 +7,20 @@ public class Tablero {
 	private Piece piece1;
 	private Piece piece2;
 	
-	public Tablero(int table_lenght, Piece piece0, Piece piece1, Piece piece2) {
+	public Tablero(int table_length, Piece piece0, Piece piece1, Piece piece2) {
 		
 		this.piece0 = piece0;
 		this.piece1 = piece1;
 		this.piece2 = piece2;
+		table = new int [table_length + 2][table_length + 2];
 		
-		table = new int [table_lenght][table_lenght];
-		for (int i = 0; i < table_lenght; i++) {
+		for (int i = 0; i < table.length - 1; i++) {
 			table[0][i] = i;
 			table[i][0] = i;
 		}
 		
-		for (int i = 1; i < table_lenght; i++) {
-			for (int j = 1; j < table.length; j++) {
+		for (int i = 1; i < table.length - 1; i++) {
+			for (int j = 1; j < table.length - 1; j++) {
 				table[i][j] = this.piece0.gettypepiece();
 			}
 		}
@@ -29,9 +29,6 @@ public class Tablero {
 		table[5][4] = this.piece1.gettypepiece();
 		table[4][4] = this.piece2.gettypepiece();
 		table[5][5] = this.piece2.gettypepiece();
-		
-		table[3][5] = this.piece1.gettypepiece();
-		table[6][4] = this.piece1.gettypepiece();
 	}
 	
     //https://rstopup.com/como-puedo-copiar-una-matriz-de-2-dimensiones-en-java.html
@@ -51,8 +48,8 @@ public class Tablero {
 	
 	public int getcountpiece(Piece piece) {
 		int countpieces = 0;
-		for (int i = 1; i < table.length; i++) {
-			for (int j = 1; j < table.length; j++) {
+		for (int i = 1; i < table.length - 1; i++) {
+			for (int j = 1; j < table.length - 1; j++) {
 				if (this.table[i][j] == piece.gettypepiece()) {
 					countpieces++;
 				}
@@ -76,40 +73,51 @@ public class Tablero {
 	
 	public int doMove(int x, int y, Piece myPiece) {
 		if(this.anypiece(x, y)) {
+			System.out.print("any");
 			return 0;
 		}
 		
-		int maxlength = this.table.length - 1;
-		int[] options = new int[8];;
+		int maxlength = this.table.length - 2;
+		int[] options = new int[8];
+		int[][] dataRule = new int[8][3];
 		
 		Piece rivalPiece = this.piece2;
 		if (rivalPiece.gettypepiece() == myPiece.gettypepiece()) {
 			rivalPiece = this.piece1;
 		}
+		System.out.print("d "+ maxlength +" "+ rivalPiece.gettypepiece() +" ");
 		
-		int[] dataRule = this.ruleDir0(x, y);
-		options[0] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		dataRule[0] = this.ruleDir0(x, y);
+		options[0] = this.countchanges(x,y,dataRule[0][0],dataRule[0][1],dataRule[0][2],rivalPiece,myPiece);
+		System.out.print("r0 "+ dataRule[0][0] +" "+ dataRule[0][1] +" "+ dataRule[0][2] +""+ options[0]);
 				
-		dataRule = this.ruleDir1(y);
-		options[1] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		dataRule[1] = this.ruleDir1(y);
+		options[1] = this.countchanges(x,y,dataRule[1][0],dataRule[1][1],dataRule[1][2],rivalPiece,myPiece);
+		System.out.print("r1 "+ dataRule[1][0] +" "+ dataRule[1][1] +" "+ dataRule[1][2] +""+ options[1]);
 		
-		dataRule = this.ruleDir2(x, y, maxlength);
-		options[2] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		dataRule[2] = this.ruleDir2(x, y, maxlength);
+		options[2] = this.countchanges(x,y,dataRule[2][0],dataRule[2][1],dataRule[2][2],rivalPiece,myPiece);
+		System.out.print("r2 "+ dataRule[2][0] +" "+ dataRule[2][1] +" "+ dataRule[2][2] +""+ options[2]);
 		
-		dataRule = this.ruleDir3(x, maxlength);
-		options[3] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		dataRule[3] = this.ruleDir3(x, maxlength);
+		options[3] = this.countchanges(x,y,dataRule[3][0],dataRule[3][1],dataRule[3][2],rivalPiece,myPiece);
+		System.out.print("r3 "+ dataRule[3][0] +" "+ dataRule[3][1] +" "+ dataRule[3][2]+""+ options[3]);
 		
-		dataRule = this.ruleDir4(x, y, maxlength);
-		options[4] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		dataRule[4] = this.ruleDir4(x, y, maxlength);
+		options[4] = this.countchanges(x,y,dataRule[4][0],dataRule[4][1],dataRule[4][2],rivalPiece,myPiece);
+		System.out.print("r4 "+ dataRule[4][0] +" "+ dataRule[4][1] +" "+ dataRule[4][2] +""+ options[4]);
 		
-		dataRule = this.ruleDir5(y, maxlength);
-		options[5] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		dataRule[5] = this.ruleDir5(y, maxlength);
+		options[5] = this.countchanges(x,y,dataRule[5][0],dataRule[5][1],dataRule[5][2],rivalPiece,myPiece);
+		System.out.print("r5 "+ dataRule[5][0] +" "+ dataRule[5][1] +" "+ dataRule[5][2] +""+ options[5]);
 		
-		dataRule = this.ruleDir6(x, y, maxlength);
-		options[6] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		dataRule[6] = this.ruleDir6(x, y, maxlength);
+		options[6] = this.countchanges(x,y,dataRule[6][0],dataRule[6][1],dataRule[6][2],rivalPiece,myPiece);
+		System.out.print("r6 "+ dataRule[6][0] +" "+ dataRule[6][1] +" "+ dataRule[6][2] +""+ options[6]);
 		
-		dataRule = this.ruleDir7(x);
-		options[7] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		dataRule[7] = this.ruleDir7(x);
+		options[7] = this.countchanges(x,y,dataRule[7][0],dataRule[7][1],dataRule[7][2],rivalPiece,myPiece);
+		System.out.print("r7 "+ dataRule[7][0] +" "+ dataRule[7][1] +" "+ dataRule[7][2] +""+ options[7]);
 		
 		int posible = 0;
 		for (int i = 0; i < options.length; i++) {
@@ -117,6 +125,20 @@ public class Tablero {
 				posible++;
 			}
 		}
+		
+		if(posible == 0) {
+			System.out.print(" p:" + posible);
+			return 0;
+		}
+		
+		for (int i = 0; i < 8; i++) {
+			if(options[i] > 0) {
+				System.out.print(" c:" + i + "->" + dataRule[i][0] +" "+ dataRule[i][1] +" "+ options[i]);
+				this.doChanges(x, y, dataRule[i][0], dataRule[i][1], options[i], myPiece);								
+			}
+		}
+		
+		System.out.print(" p::" + posible);
 		return posible;
 	}
 	
@@ -183,7 +205,7 @@ public class Tablero {
 	private int countchanges(int x, int y, int xdir, int ydir, int maxIterations, Piece rpiece, Piece mpiece) {
 		int counts = 0;
 		int index = 1;
-		while(index <= maxIterations){
+		while(index <= maxIterations + 1){
 			x = x + xdir;
 			y = y + ydir;
 			if(table[x][y] == rpiece.gettypepiece()) {
@@ -201,5 +223,15 @@ public class Tablero {
 		return counts;
 	}
 	
+	private void doChanges(int x, int y, int xi, int yi, int maxMove, Piece mPiece) {
+		for (int i = 0; i <= maxMove; i++) {
+			this.table[x + (xi * i)][y + (yi * i)] = mPiece.gettypepiece();
+		}
+	}
 	
 }
+
+
+
+
+
