@@ -4,16 +4,15 @@ public class InterfaceClient {
 	
 	public void showtable(Tablero tablero, Piece p0, Piece p1, Piece p2) {
 		int[][] table = tablero.gettable();
-		for(int x=0; x<table.length; x++) {
-			if (x == 1) {
+		for (int y=0; y<table.length; y++) {
+			if (y == 1) {
 				for (int i = 0; i <= table.length; i++) {
 					System.out.print("--");					
 				}
 				System.out.println("");
-			}
-			
-			for (int y=0; y<table.length; y++) {
-				if (y == 1) {
+			}			
+			for(int x=0; x<table.length; x++) {
+				if (x == 1) {
 					System.out.print("|");					
 				}
 				if (table[x][y] == p0.gettypepiece()) {

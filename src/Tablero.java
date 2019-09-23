@@ -30,8 +30,8 @@ public class Tablero {
 		table[4][4] = this.piece2.gettypepiece();
 		table[5][5] = this.piece2.gettypepiece();
 		
-//		table[3][3] = this.piece1.gettypepiece();
-//		table[6][6] = this.piece1.gettypepiece();
+		table[3][5] = this.piece1.gettypepiece();
+		table[6][4] = this.piece1.gettypepiece();
 	}
 	
     //https://rstopup.com/como-puedo-copiar-una-matriz-de-2-dimensiones-en-java.html
@@ -89,6 +89,9 @@ public class Tablero {
 		dataRule = this.ruleDir1(y);
 		options[1] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
 		
+		dataRule = this.ruleDir2(x, y, maxlength);
+		options[2] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		
 		dataRule = this.ruleDir3(x, maxlength);
 		options[3] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
 		
@@ -98,9 +101,11 @@ public class Tablero {
 		dataRule = this.ruleDir5(y, maxlength);
 		options[5] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
 		
+		dataRule = this.ruleDir6(x, y, maxlength);
+		options[6] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
+		
 		dataRule = this.ruleDir7(x);
 		options[7] = this.countchanges(x,y,dataRule[0],dataRule[1],dataRule[2],rivalPiece,myPiece);
-		
 	}
 	
 	private int[] ruleDir0(int x, int y) {
@@ -118,15 +123,15 @@ public class Tablero {
 		return array;
 	}
 	
-//	private int[] ruleDir2(int x, int y, int maxlength) {
-//		int[] array = {+1,-1, 0};
-//		int maxDiag = maxlength - x;
-//		int ruleChange = x - y;
-//		int maxIterations = maxDiag;
-//		if (ruleChange < 0) {maxIterations = maxDiag + ruleChange;}
-//		array[2] = maxIterations;
-//		return array;
-//	}
+	private int[] ruleDir2(int x, int y, int maxlength) {
+		int[] array = {+1,-1, 0};
+		int maxDiag = maxlength - x;
+		int ruleChange = y - 1;
+		int maxIterations = maxDiag;
+		if (ruleChange < maxDiag) {maxIterations = ruleChange;}
+		array[2] = maxIterations;
+		return array;
+	}
 	
 	private int[] ruleDir3(int x, int maxlength) {
 		int[] array = {+1,0, maxlength - x};
@@ -148,17 +153,15 @@ public class Tablero {
 		return array;
 	}
 	
-//	private int[] ruleDir6(int x, int y, int maxlength) {
-//		int[] array = { -1, +1, 0 };
-//		int maxDiag = maxlength - x;
-//		int ruleChange = x - y;
-//		int maxIterations = maxDiag;
-//		if (ruleChange < 0) {
-//			maxIterations = maxDiag + ruleChange;
-//		}
-//		array[2] = maxIterations;
-//		return array;
-//	}
+	private int[] ruleDir6(int x, int y, int maxlength) {
+		int[] array = { -1, +1, 0 };
+		int maxDiag = x - 1;
+		int ruleChange = maxlength - y;
+		int maxIterations = maxDiag;
+		if (ruleChange < maxDiag) { maxIterations = ruleChange;	}
+		array[2] = maxIterations;
+		return array;
+	}
 	
 	private int[] ruleDir7(int x) {
 		int[] array = {-1,0, x - 1};
@@ -167,24 +170,18 @@ public class Tablero {
 	
 	private int countchanges(int x, int y, int xdir, int ydir, int maxIterations, Piece rpiece, Piece mpiece) {
 		int counts = 0;
-		int index = 1;		
-		System.out.println(maxIterations);
+		int index = 1;
 		while(index <= maxIterations){
 			x = x + xdir;
 			y = y + ydir;
-			String temp = "for " + index;
-			System.out.print(temp);
 			if(table[x][y] == rpiece.gettypepiece()) {
 				++counts;
-				System.out.println("si" + counts);
 			}
 			else if (table[x][y] == mpiece.gettypepiece()) {
-				System.out.println("Mia " + counts);
 				break;
 			}
 			else {
 				counts = 0;
-				System.out.println("roto " + counts);
 				break;
 			}
 			index++;
