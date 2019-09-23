@@ -33,9 +33,9 @@ public class InterfaceClient {
 		}
 	}
 
-	public int[] entercoordines(String textplayer){
+	public int[] entercoordines(String textplayer, int maxlenght){
 		int[] coord = {0, 0};
-		while (coord[0] == 0 || coord[1] == 0 ) {
+		while ((coord[0] == 0 || coord[1] == 0) || (coord[0] > maxlenght || coord[1] > maxlenght)) {
 			coord[0] = Integer.parseInt(JOptionPane.showInputDialog(textplayer + ":\nIngresa x"));
 			coord[1] = Integer.parseInt(JOptionPane.showInputDialog(textplayer + ":\nIngresa y"));
 		}
