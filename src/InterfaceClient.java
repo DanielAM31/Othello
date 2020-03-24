@@ -2,9 +2,7 @@ import javax.swing.JOptionPane;
 
 public class InterfaceClient {
 	
-	public void showtable (Tablero tablero, Piece p0, Piece p1, Piece p2) {
-		int[][] table = tablero.gettable();
-		
+	public void showtable (int[][] table, Piece p0, Piece p1, Piece p2) {	
 		System.out.println("");
 		for (int y=0; y<table.length; y++) {
 			if (y == 1) {
