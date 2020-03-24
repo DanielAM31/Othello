@@ -15,10 +15,10 @@ public class GraphicalInterface extends JFrame implements ActionListener {
 	ImageIcon iconobtn2 = new ImageIcon(Iconurl2);
 	Icon icon1 = new JButton(this.iconobtn1).getIcon();
 	
+	int isRow = 4, isCol = 4;
+	
 	public GraphicalInterface(int fila) {
-		
 		/*Creación de los Botones y el panel*/
-		
 		this.filabotones = fila;
 		this.cantidadbotones = this.filabotones * this.filabotones;
 		this.matrizbotones = new JButton[this.cantidadbotones];
@@ -31,20 +31,17 @@ public class GraphicalInterface extends JFrame implements ActionListener {
 			this.panel.add(this.matrizbotones[i]);
 		}
 				
-		add(this.panel);
-				
+		add(this.panel);	
 	}
 	
-	public void actionPerformed(ActionEvent c) {
-		
+	public void actionPerformed(ActionEvent eventClick) {
 		for(int i=0; i < this.cantidadbotones; i++) {
-			if(c.getSource() == this.matrizbotones[i]) {
+			if(eventClick.getSource() == this.matrizbotones[i]) {
 				Icon cadena = this.matrizbotones[i].getIcon();
 				
-				int isRow = (i / this.filabotones) + 1;
-				int isCol = (i % this.filabotones) + 1;
-				System.out.print("\nRow " + isRow + " - Col " + isCol);				
-				
+				this.isRow = (i / this.filabotones) + 1;
+				this.isCol = (i % this.filabotones) + 1;		
+					
 				if(cadena == icon1) {
 					this.matrizbotones[i].setIcon(this.iconobtn2);
 				}
