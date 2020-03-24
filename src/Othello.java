@@ -74,6 +74,6 @@ public class Othello {
 		}
 		
 		objInterfaceClient.showwin(textPlayer, pieceToMove, objTablero);
+		return;
 	}
-	
 }
