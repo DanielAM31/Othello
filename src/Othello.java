@@ -16,6 +16,7 @@ public class Othello {
 		Tablero objTablero = new Tablero(table_length, piece0, piece1, piece2);
 		
 		int[][] table = objTablero.gettable();
+		objTableroGrafico.changeIcons(table, table_length);
 		objInterfaceClient.showtable(table, piece0, piece1, piece2);
 		
 		Player player1 = new Player(piece1);
