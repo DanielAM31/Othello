@@ -3,9 +3,9 @@ public class Othello {
 	public static void main (String[] args) {
 		
 		int table_length = 8;
-		GraphicalInterface form = new GraphicalInterface(table_length);
-		form.setBounds(0, 0, table_length * 50 + 10, table_length * 50 + 60);
-		form.setVisible(true);
+		GraphicalInterface objTableroGrafico = new GraphicalInterface(table_length);
+		objTableroGrafico.setBounds(0, 0, table_length * 50 + 10, table_length * 50 + 60);
+		objTableroGrafico.setVisible(true);
 		
 		InterfaceClient objInterfaceClient = new InterfaceClient();	
 		
@@ -26,7 +26,7 @@ public class Othello {
 		Test objTest = new Test();
 		boolean testRun = objInterfaceClient.iwantruntest();
 		
-		int[] coords = new int [2];
+		int[] coords = {objTableroGrafico.isCol, objTableroGrafico.isRow};
 		int coordsNoValid = 0;
 		int possiblePlay = 0;
 		String[] textPlayer = {"Jugador 1", "Jugador 2"};
@@ -49,7 +49,8 @@ public class Othello {
 				possiblePlay = 0;
 				while (coordsNoValid == 0) {
 					if (testRun == false) {
-						coords = objInterfaceClient.entercoordines(textPlayer[play], table_length);										
+							coords[0] = objTableroGrafico.isCol;
+							coords[1] = objTableroGrafico.isRow;					
 					}
 					else {
 						coords = objTest.getonecoords();

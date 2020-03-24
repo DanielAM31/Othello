@@ -68,7 +68,6 @@ public class InterfaceClient {
 		}
 		JOptionPane.showMessageDialog(null, "E N D   G A M E");
 	}
-
 }
 
 
