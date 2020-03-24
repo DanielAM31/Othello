@@ -15,7 +15,9 @@ public class Othello {
 		
 		Tablero objTablero = new Tablero(table_length, piece0, piece1, piece2);
 		
-		objInterfaceClient.showtable(objTablero, piece0, piece1, piece2);
+		int[][] table = objTablero.gettable();
+		objTableroGrafico.changeIcons(table, table_length);
+		objInterfaceClient.showtable(table, piece0, piece1, piece2);
 		
 		Player player1 = new Player(piece1);
 		Player player2 = new Player(piece2);
@@ -47,10 +49,11 @@ public class Othello {
 			
 			if (possiblePlay > 0)  {
 				possiblePlay = 0;
+				objTableroGrafico.setLabelPlayer(textPlayer[play]);
 				while (coordsNoValid == 0) {
 					if (testRun == false) {
 							coords[0] = objTableroGrafico.isCol;
-							coords[1] = objTableroGrafico.isRow;					
+							coords[1] = objTableroGrafico.isRow;
 					}
 					else {
 						coords = objTest.getonecoords();
@@ -64,11 +67,13 @@ public class Othello {
 			if (play == 0) {play = 1;}
 			else {play = 0;}
 			
-			objInterfaceClient.showtable(objTablero, piece0, piece1, piece2);
+			table = objTablero.gettable();
+			objInterfaceClient.showtable(table, piece0, piece1, piece2);
+			objTableroGrafico.changeIcons(table, table_length);
 			allPieces0 = objTablero.getcountpiece(piece0);
 		}
 		
 		objInterfaceClient.showwin(textPlayer, pieceToMove, objTablero);
+		return;
 	}
-	
 }
