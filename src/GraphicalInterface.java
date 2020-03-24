@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.GridLayout;
 import java.awt.event.*;
@@ -30,8 +31,8 @@ public class GraphicalInterface extends JFrame implements ActionListener {
 			this.matrizbotones[i].addActionListener(this);
 			this.panel.add(this.matrizbotones[i]);
 		}
-				
-		add(this.panel);	
+
+		add(this.panel);
 	}
 	
 	public void actionPerformed(ActionEvent eventClick) {
@@ -51,5 +52,10 @@ public class GraphicalInterface extends JFrame implements ActionListener {
 				try{Thread.sleep(100);}catch(InterruptedException ie){}
 			}
 		}
+	}
+	
+	public void setLabelPlayer(String text) {
+		Border border = BorderFactory.createTitledBorder(text);
+		this.panel.setBorder(border);
 	}
 }

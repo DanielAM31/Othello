@@ -47,10 +47,11 @@ public class Othello {
 			
 			if (possiblePlay > 0)  {
 				possiblePlay = 0;
+				objTableroGrafico.setLabelPlayer(textPlayer[play]);
 				while (coordsNoValid == 0) {
 					if (testRun == false) {
 							coords[0] = objTableroGrafico.isCol;
-							coords[1] = objTableroGrafico.isRow;					
+							coords[1] = objTableroGrafico.isRow;
 					}
 					else {
 						coords = objTest.getonecoords();
