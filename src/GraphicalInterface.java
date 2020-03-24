@@ -41,12 +41,14 @@ public class GraphicalInterface extends JFrame implements ActionListener {
 			if(c.getSource() == this.matrizbotones[i]) {
 				Icon cadena = this.matrizbotones[i].getIcon();
 				
+				int isRow = (i / this.filabotones) + 1;
+				int isCol = (i % this.filabotones) + 1;
+				System.out.print("\nRow " + isRow + " - Col " + isCol);				
+				
 				if(cadena == icon1) {
-					
 					this.matrizbotones[i].setIcon(this.iconobtn2);
 				}
 				else{
-				
 					this.matrizbotones[i].setIcon(this.iconobtn1);
 				}
 				try{Thread.sleep(100);}catch(InterruptedException ie){}

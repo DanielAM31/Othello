@@ -49,7 +49,9 @@ public class Othello {
 				possiblePlay = 0;
 				while (coordsNoValid == 0) {
 					if (testRun == false) {
-						//coords = objInterfaceClient.entercoordines(textPlayer[play], table_length);
+						// El evento del click debe enviar datos acá
+						coords[0] = 0;
+						coords[1] = 0;
 					}
 					else {
 						coords = objTest.getonecoords();
