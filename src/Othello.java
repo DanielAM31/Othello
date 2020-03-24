@@ -3,6 +3,9 @@ public class Othello {
 	public static void main (String[] args) {
 		
 		int table_length = 8;
+		GraphicalInterface form = new GraphicalInterface(table_length);
+		form.setBounds(0, 0, table_length * 50 + 10, table_length * 50 + 60);
+		form.setVisible(true);
 		
 		InterfaceClient objInterfaceClient = new InterfaceClient();	
 		
