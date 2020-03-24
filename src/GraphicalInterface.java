@@ -10,8 +10,8 @@ public class GraphicalInterface extends JFrame implements ActionListener {
 	int cantidadbotones; 
 	JButton matrizbotones[];
 	JPanel panel;
-	String Iconurl1 = "src/img/phone.png";
-	String Iconurl2 = "src/img/gold.png";
+	String Iconurl1 = "src/img/circle_black.png";
+	String Iconurl2 = "src/img/circle_white.png";
 	ImageIcon iconobtn1 = new ImageIcon(Iconurl1);
 	ImageIcon iconobtn2 = new ImageIcon(Iconurl2);
 	Icon icon1 = new JButton(this.iconobtn1).getIcon();
