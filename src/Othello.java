@@ -49,7 +49,7 @@ public class Othello {
 				possiblePlay = 0;
 				while (coordsNoValid == 0) {
 					if (testRun == false) {
-						coords = objInterfaceClient.entercoordines(textPlayer[play], table_length);										
+						//coords = objInterfaceClient.entercoordines(textPlayer[play], table_length);
 					}
 					else {
 						coords = objTest.getonecoords();
